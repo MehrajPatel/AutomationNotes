@@ -1,0 +1,45 @@
+---
+- hosts: all
+  tasks:
+     - name: Generating ssh keys
+       shell: echo -e 'y\n' | ssh-keygen -t rsa -P "" -f $HOME/.ssh/id_rsa
+
+     - name: Disabling strict host key checking
+       shell: touch ~/.ssh/config; echo -e \ "host *\n StrictHostKeyChecking no\n UserKnownHostsFile=/dev/null" \ > ~/.ssh/config; chmod 644 ~/.ssh/config
+
+     - name: Changing file mode
+       file:
+        path: ~/.ssh/config
+        owner: mehrajpatel
+        group: mehrajpatel
+        mode: 0644
+
+     - name: Fetch keys from remote hosts
+       fetch:
+         src: ~/.ssh/id_rsa.pub
+         flat: yes
+         dest: "/tmp/{{ inventory_hostname }}.sourcelist"
+     
+     - name: Create ssh_keys_file
+       delegate_to: localhost
+       shell: "touch ~/ssh_keys_file"
+
+    
+     - name: create concatenated keys file
+       delegate_to: localhost
+       shell: "cat /tmp/*.sourcelist >> ssh_keys_file"
+
+     - name: sleep for 3 seconds and continue with play
+       wait_for: timeout=3
+       delegate_to: localhost
+
+     - name: Copy keys to remote servers
+       copy:
+        src: ~/ssh_keys_file
+        dest: ~/.ssh/authorized_keys_new
+     
+     - name: concatenated keys file with previous one
+       shell: "cat ~/.ssh/authorized_keys_new >> ~/.ssh/authorized_keys"
+       
+     - name: Cleanup
+       shell: "rm ~/.ssh/authorized_keys_new"
