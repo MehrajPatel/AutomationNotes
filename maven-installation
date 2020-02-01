@@ -1,8 +1,5 @@
 #Java need to be installed and configured before this installation
 
-sudo yum install wget -y
-sudo yum install unzip -y
-
 wget http://mirrors.estointernet.in/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip
 unzip apache-maven-3.6.3-bin.zip
 
