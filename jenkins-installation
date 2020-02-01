@@ -2,6 +2,8 @@ sudo yum install epel-release -y
 sudo yum update -y
 sudo yum install wget -y
 sudo yum install unzip -y
+sudo yum install git -y
+
 sudo reboot
 
 wget  -O $HOME/jdk-8u131-linux-x64.rpm --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.rpm"
@@ -34,6 +36,9 @@ location / {
 sudo setsebool httpd_can_network_connect 1 -P
 sudo systemctl restart nginx
 
+git init
+git clone https://github.com/MehrajPatel/gol.git
+cd gol
 
 
 ln -s /usr/java/latest /usr/bin/java
