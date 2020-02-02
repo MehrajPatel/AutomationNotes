@@ -11,6 +11,7 @@ sudo rpm -ivh $HOME/jdk-8u131-linux-x64.rpm
 sudo su -c 'cat >>/etc/profile.d/java.sh <<EOL
 JAVA_HOME=/usr/java/latest
 EOL'
+sudo chmod 666 /etc/profile.d/java.sh
 source 	/etc/profile.d/java.sh
 
 sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
