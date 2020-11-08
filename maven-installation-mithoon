@@ -1,0 +1,49 @@
+Install Maven Build Tool in Linux Server/ Set Class path for Maven Build Tool in Linux Server
+-------------------------------------------------------------------------------------------------------------------------
+
+Pre Requisite Software
+-----------------------------
+Java is the Pre - Requisite Software for Maven.
+
+wget  -O $HOME/jdk-8u131-linux-x64.rpm --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.rpm"
+sudo rpm -ivh ~/jdk-8u131-linux-x64.rpm"
+sudo su -c 'cat >>/etc/profile.d/java.sh <<EOL
+JAVA_HOME=/usr/java/latest
+EOL'
+ 
+java -version
+
+Install Maven
+------------------
+Step1) Login as a root user and change the directory to /opt/
+
+sudo su -
+cd /opt/
+
+Step2) Download the Maven Software
+
+wget http://apachemirror.wuchna.com/maven/maven-3/3.6.2/binaries/apache-maven-3.6.2-bin.zip
+
+Step3) Set the class path/Environmental Variable
+
+For Specific User
+----------------------
+vi ~/.bash_profile
+
+export M2_HOME=/opt/apache-maven-3.6.2
+
+export PATH=$PATH:$M2_HOME/bin
+
+source ~/.bash_profile
+
+For All Users
+---------------------- 
+vi /etc/profile
+export M2_HOME=/opt/apache-maven-3.6.2
+export PATH = $PATH:$M2_HOME/bin
+
+source /etc/profile
+
+Step4) Check the Maven version
+
+mvn -version
