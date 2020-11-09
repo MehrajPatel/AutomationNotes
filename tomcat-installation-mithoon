@@ -9,7 +9,9 @@ unzip apache-tomcat-9.0.37.zip
 
 chmod u+x /opt/apache-tomcat-9.0.37/bin/*.sh
 
-mv apache-tomcat-9.0.37 tomcat9
+#mv apache-tomcat-9.0.37 tomcat9
+ln -s /opt/apache-tomcat-9.0.37/bin/startup.sh /usr/bin/startTomcat
+ln -s /opt/apache-tomcat-9.0.37/bin/shutdown.sh /usr/bin/stopTomcat
 
 #Create a system user called tomcat.
 useradd -r tomcat
@@ -57,12 +59,26 @@ systemctl enable tomcat.service
 systemctl status tomcat.service
 
 #netstat -tunlap
-#ps -fax | grep tomcat
+#ps -fax | grep tomcat 
 
-
+#To allow manage server option from remote browser
 #vi /usr/local/tomcat9/webapps/manager/META-INF/context.xml
 
-#Comment the below lines	
+#Comment the below line	
 <!-- 	 
  	 	<Valve className="org.apache.catalina.valves.RemoteAddrValve" allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />       
 -->
+#add following line under <tomcat-users> to for authentication and authorization
+<user username=="UserName1" password="P@$$w0rd" roles="manager-gui,admin-gui"/>
+
+#To allow host manager option from remote browser
+vi /usr/local/tomcat9/webapps/host-manager/META-INF/context.xml
+
+#Comment the below line
+<!-- 	 
+ 	 	<Valve className="org.apache.catalina.valves.RemoteAddrValve" allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />       
+-->
+
+#To change the port number
+vi /usr/local/tomcat9/conf/server.xml
+#change port number from <Connector port=""> , line number 69
