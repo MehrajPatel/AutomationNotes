@@ -1,3 +1,26 @@
+_________________________Simple_____________________________________
+#Apache tomcat installation
+
+cd /tmp
+wget http://www-us.apache.org/dist/tomcat/tomcat-7/v7.0.99/bin/apache-tomcat-7.0.99.tar.gz
+tar xzf apache-tomcat-7.0.99.tar.gz
+mv apache-tomcat-7.0.99 /usr/local/tomcat7
+cd /usr/local/tomcat7
+
+#change port from 8080 to anyport required 
+#add admin user 
+and restart the server
+
+vi /usr/local/tomcat7/conf/server.xml
+vi /usr/local/tomcat7/conf/tomcat-users.xml
+  <role rolename="manager-script"/>
+  <user username="admin" password="admin" roles="manager-script"/>
+
+./bin/shutdown.sh && ./bin/startup.sh
+
+_________________________Advanced_____________________________________
+
+
 #Login as a root user
 sudo su -
 
