@@ -1,5 +1,4 @@
-Install Maven Build Tool in Linux Server/ Set Class path for Maven Build Tool in Linux Server
--------------------------------------------------------------------------------------------------------------------------
+Prerequisit: Java
 
 Pre Requisite Software
 -----------------------------
@@ -12,6 +11,23 @@ JAVA_HOME=/usr/java/latest
 EOL'
  
 java -version
+
+______________________________________________________Basic Installation______________________________________________
+
+#Java need to be installed and configured before this installation
+
+wget http://mirrors.estointernet.in/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip
+unzip apache-maven-3.6.3-bin.zip
+
+cd apache-maven-3.6.3
+export M2_HOME=`pwd`
+export M2=$M2_HOME/bin
+export PATH=$M2:$PATH
+
+__________________________________________________Advanced Installation______________________________________________
+
+Install Maven Build Tool in Linux Server/ Set Class path for Maven Build Tool in Linux Server
+-------------------------------------------------------------------------------------------------------------------------
 
 Install Maven
 ------------------
