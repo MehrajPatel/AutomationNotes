@@ -1,4 +1,4 @@
-_________________________Simple_____________________________________
+_________________________Basic Installation_____________________________________
 #Apache tomcat installation
 
 cd /tmp
@@ -18,7 +18,7 @@ vi /usr/local/tomcat7/conf/tomcat-users.xml
 
 ./bin/shutdown.sh && ./bin/startup.sh
 
-_________________________Advanced_____________________________________
+_________________________Advanced Installation_____________________________________
 
 
 #Login as a root user
